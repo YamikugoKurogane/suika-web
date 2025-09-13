@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios Gastronómicos Chile</title>
+  <link rel="stylesheet" href="{% static 'stiles.css' %}">
+</head>
+<body>
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">Servicios Gastronómicos Chile</div>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Sección inicio -->
+  <section id="inicio" class="hero">
+    <h1>Bienvenidos a Servicios Gastronómicos Chile</h1>
+    <p>Experiencia culinaria de calidad, al alcance de tu evento.</p>
+  </section>
+
+  <!-- Servicios -->
+<section id="servicios" class="section">
+    <h2>Nuestros Servicios</h2>
+    <div class="cards">
+        {% for servicio in servicios %}
+        <div class="card">
+            {% if servicio.imagen %}
+            <img src="{{ servicio.imagen.url }}" alt="{{ servicio.nombre }}" style="width:100%; border-radius:8px;">
+            {% endif %}
+            <h3>{{ servicio.nombre }}</h3>
+            <p>{{ servicio.descripcion }}</p>
+        </div>
+        {% empty %}
+        <p>No hay servicios disponibles.</p>
+        {% endfor %}
+    </div>
+</section>
+
+
+  <!-- Blog -->
+<section id="blog" class="section">
+    <h2>Blog Gastronómico</h2>
+    <div class="blog-grid">
+        {% for post in blogs %}
+        <article class="blog-post">
+            {% if post.imagen %}
+            <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" style="width:100%; max-width:25%; margin-bottom:10px; border-radius:8px;">
+            {% endif %}
+            <h3>{{ post.titulo }}</h3>
+            <p>{{ post.contenido|truncatewords:30 }}</p>
+            <small>Publicado: {{ post.fecha_publicacion|date:"d M Y" }}</small>
+        </article>
+        {% empty %}
+        <p>No hay publicaciones disponibles.</p>
+        {% endfor %}
+    </div>
+</section>
+
+
+  <!-- Contacto -->
+  <section id="contacto" class="section">
+        <h2>Contacto</h2>
+    <!--     <form id="contact-form">
+      <input type="text" placeholder="Nombre" required>
+      <input type="email" placeholder="Correo electrónico" required>
+      <textarea placeholder="Mensaje" required></textarea>
+      <button type="submit">Enviar</button>
+    </form> -->
+    <!-- Contacto por WhatsApp -->
+     <p> </p>
+  <a href="https://wa.me/56977249527?text=Hola%20quisiera%20más%20información%20sobre%20sus%20servicios%20de%20catering"
+   target="_blank"
+   class="btn-whatsapp">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.lTqMPiPP11QPJ0FFSx9h6gHaHc?rs=1&pid=ImgDetMain&o=7&rm=3" alt="WhatsApp" class="icon">
+   Contáctanos por WhatsApp
+</a>
+
+</section>
+
+
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Servicios Gastronómicos Chile. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
